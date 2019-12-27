@@ -8,7 +8,12 @@
             <th scope="col">Creation Time</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="table_load">
+        <!-- Image loader -->
+        <div id='loader' class="container h-100  justify-content-center" style="display: none;">
+            <img src='{{asset('picture/loding.gif')}}'>
+        </div>
+        <!-- Image loader -->
         @foreach ($users as $user)
         <tr>
             <td>{{$loop->iteration}}</td>

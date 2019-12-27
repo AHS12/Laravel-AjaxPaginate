@@ -16,14 +16,14 @@
     {{-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> --}}
     {{-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"
         integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script> --}}
-        <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
         integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 
     <title>Hello, world!</title>
 
     <style>
         #loader {
-          position: fixed;
+            /* position: fixed;
           display: none;
           width: 100%;
           height: 100%;
@@ -33,10 +33,21 @@
           bottom: 0;
           background-color: rgba(0,0,0,0.5);
           z-index: 2;
-          cursor: pointer;
+          cursor: pointer; */
+            position: absolute;
+            top: 0;
+            width: 100%;
+            color: #333333;
+            height: 150px;
+            overflow: hidden;
+            padding: 10px 0;
+            align-items: center;
+            justify-content: space-around;
+            display: flex;
+            float: none;
+            z-index: 100000;
         }
-
-        </style>
+    </style>
 </head>
 
 <body>
@@ -46,15 +57,13 @@
             @include('ajaxLoad')
 
 
+
+
         </div>
 
     </div>
 
-    <!-- Image loader -->
-    <div id='loader' style="display: none;">
-        <img src='{{asset('picture/loding.gif')}}' width='32px' height='32px'>
-    </div>
-    <!-- Image loader -->
+
 
 
     <script>
@@ -74,6 +83,7 @@
                     cache: false,
                     beforeSend: function () {
                         $('#loader').show();
+                        //$('#table_data').append('<img style="position: absolute; left: 0; top: 0; z-index: 100000;" src="{{asset('picture/loding.gif')}}" />');
                     },
                     success: function (data) {
                         $('#table_data').html(data);
@@ -99,6 +109,6 @@
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
 
-    </body>
+</body>
 
 </html>
