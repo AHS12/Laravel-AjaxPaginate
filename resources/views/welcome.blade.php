@@ -22,18 +22,10 @@
     <title>Hello, world!</title>
 
     <style>
+
+        /* loder gif style */
         #loader {
-            /* position: fixed;
-          display: none;
-          width: 100%;
-          height: 100%;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: rgba(0,0,0,0.5);
-          z-index: 2;
-          cursor: pointer; */
+
             position: absolute;
             top: 0;
             width: 100%;
@@ -45,7 +37,23 @@
             justify-content: space-around;
             display: flex;
             float: none;
-            z-index: 100000;
+        }
+
+        #loaderDiv {
+
+
+            position: absolute;
+            top: 0;
+            width: 100%;
+            color: #333333;
+            height: 150px;
+            overflow: hidden;
+            padding: 10px 0;
+            align-items: center;
+            justify-content: space-around;
+            display: flex;
+            float: none;
+
         }
     </style>
 </head>
@@ -54,11 +62,10 @@
     <div class="container">
         <h4>Pagination Useing Ajax</h4>
         <div id="table_data">
-            @include('ajaxLoad')
-
-
-
-
+            @include('ajaxLoadTable')
+        </div>
+        <div id="div_data">
+            @include('ajaxLoadDiv')
         </div>
 
     </div>
@@ -68,28 +75,57 @@
 
     <script>
         $(document).ready(function () {
-            alert("hello");
+            //alert("hello");
             $(document).on('click', '.pagination a', function (event) {
                 event.preventDefault();
 
 
-                var page = $(this).attr('href').split('page=')[1];
-                fetch_data(page);
+                var page_a = $(this).attr('href').split('page_a=')[1];
+                var page_b = $(this).attr('href').split('page_b=')[1];
+                console.log(page_a);
+                console.log(page_b);
+
+
+                // since gonna use multiple ajax pagination
+                if (page_a) {
+                    fetch_data_a(page_a);
+                }
+
+                if (page_b) {
+                    fetch_data_b(page_b);
+                }
+
+
             });
 
-            function fetch_data(page) {
+            function fetch_data_a(page) {
                 $.ajax({
-                    url: "/GetAllUser/?page="+page,
+                    url: "/GetAllUser/?page_a=" + page,
                     cache: false,
                     beforeSend: function () {
                         $('#loader').show();
-                        //$('#table_data').append('<img style="position: absolute; left: 0; top: 0; z-index: 100000;" src="{{asset('picture/loding.gif')}}" />');
                     },
                     success: function (data) {
                         $('#table_data').html(data);
                     },
                     complete: function () {
                         $('#loader').hide();
+                    },
+                });
+            }
+
+            function fetch_data_b(page) {
+                $.ajax({
+                    url: "/GetAllUserDiv/?page_b=" + page,
+                    cache: false,
+                    beforeSend: function () {
+                        $('#loaderDiv').show();
+                    },
+                    success: function (data) {
+                        $('#div_data').html(data);
+                    },
+                    complete: function () {
+                        $('#loaderDiv').hide();
                     },
                 });
             }

@@ -10,9 +10,23 @@ class UserController extends Controller
     //
 
     public function index(){
-        $users = USer::paginate(10);
+
+    /*
+        Model->paginate(10, ['*'], 'paramName');
+
+        10 = Max items per page
+
+        ['*'] = colums
+
+        paramName = pagination param name
+
+    */
+
+        $users = User::paginate(5,['*'],'page_a'); //here users will use page named page_a
+        $usersDiv = User::paginate(3,['*'],'page_b');//here usersDiv will use page named page_b
         $data = [
-            'users' => $users
+            'users'         => $users,
+            'usersDiv'      =>$usersDiv
         ];
 
         return view('welcome',$data);
@@ -26,17 +40,30 @@ class UserController extends Controller
 
         if ($request->ajax()) {
             //dd("elloh");
-            $users = User::paginate(10);
+            $users = User::paginate(5,['*'],'page_a');//here users will use page named page_a
             $data = [
                 'users' => $users
             ];
 
-            return view('ajaxLoad',$data)->render();
+            return view('ajaxLoadTable',$data)->render();
         }
 
 
-        //dd($users);
+    }
+
+    public function GetAllUserDiv(Request $request){
+
+        if ($request->ajax()) {
+            //dd("elloh");
+            $usersDiv = User::paginate(3,['*'],'page_b');//here usersDiv will use page named page_b
+            $data = [
+                'usersDiv' => $usersDiv
+            ];
+
+            return view('ajaxLoadDiv',$data)->render();
+        }
 
 
     }
+
 }

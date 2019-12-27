@@ -15,3 +15,4 @@ Route::get('/','UserController@index' );
 
 
 Route::get('/GetAllUser','UserController@GetAllUser');
+Route::get('/GetAllUserDiv','UserController@GetAllUserDiv');

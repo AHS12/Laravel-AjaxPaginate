@@ -1,3 +1,6 @@
+{{-- This Will have Page Named page_a --}}
+
+
 <table class="table">
     <thead class="thead-dark">
         <tr>
@@ -10,7 +13,7 @@
     </thead>
     <tbody id="table_load">
         <!-- Image loader -->
-        <div id='loader' class="container h-100  justify-content-center" style="display: none;">
+        <div id='loader' class="container h-50 justify-content-center" style="display: none;">
             <img src='{{asset('picture/loding.gif')}}'>
         </div>
         <!-- Image loader -->
@@ -28,4 +31,5 @@
     </tbody>
 </table>
 
-{!! $users->render() !!}
+{!! $users->render() !!} {{-- page_a --}}
+
